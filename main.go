@@ -23,6 +23,13 @@ func main() {
 
 	model := language.MustTransformDSLToProto(string(bytes))
 	graph, err := graph.NewAuthorizationModelGraph(model)
+	if err != nil {
+		log.Fatalf("failed to build graph: %v", err)
+	}
+	graph, err = graph.Reversed()
+	if err != nil {
+		log.Fatalf("failed to reverse graph: %v", err)
+	}
 
 	result := graph.GetDOT()
 
