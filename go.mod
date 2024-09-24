@@ -4,7 +4,7 @@ go 1.22.3
 
 toolchain go1.22.6
 
-require github.com/openfga/language/pkg/go v0.2.0-beta.2.0.20240913212951-886662aac260
+require github.com/openfga/language/pkg/go v0.2.0-beta.2.0.20240923151416-0e33e9659f96
 
 require (
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
