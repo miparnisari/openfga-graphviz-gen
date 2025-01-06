@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	graph "github.com/openfga/language/pkg/go/graph"
+	"github.com/openfga/language/pkg/go/graph"
 	language "github.com/openfga/language/pkg/go/transformer"
 )
 
@@ -22,16 +22,14 @@ func main() {
 	}
 
 	model := language.MustTransformDSLToProto(string(bytes))
-	graph, err := graph.NewAuthorizationModelGraph(model)
-	if err != nil {
-		log.Fatalf("failed to build graph: %v", err)
-	}
-	graph, err = graph.Reversed()
-	if err != nil {
-		log.Fatalf("failed to reverse graph: %v", err)
-	}
+	//graph2, err := graph.NewAuthorizationModelGraph(model)
+	//if err != nil {
+	//	log.Fatalf("failed to build graph: %v", err)
+	//}
 
-	result := graph.GetDOT()
+	wg, err := graph.NewWeightedAuthorizationModelGraphBuilder().Build(model)
+
+	result := wg.GetDOT()
 
 	var writer io.Writer
 	if *outputPathFlag != "" && *outputPathFlag != "-" {
